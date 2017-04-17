@@ -13,6 +13,8 @@ export interface MarkerOptions {
     icon?: string;
     width?: number;
     height?: number;
+    anchor_x?: number;
+    anchor_y?: number;
     title?: string;
     content?: string;
     enableMessage?: boolean;

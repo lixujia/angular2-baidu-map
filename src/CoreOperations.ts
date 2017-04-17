@@ -42,7 +42,14 @@ export const createMarker = function(marker: MarkerOptions, pt: any) {
     var BMap: any = (<any>window)['BMap'];
     var opts: any = {};
     if (marker.icon) {
-        var icon = new BMap.Icon(marker.icon, new BMap.Size(marker.width, marker.height));
+        if (marker.anchor_x && marker.anchor_y) {
+            var icon = new BMap.Icon(marker.icon, new BMap.Size(marker.width, marker.height), {
+                anchor: new BMap.Size(marker.anchor_x, marker.anchor_y)
+            });
+        } else {
+            var icon = new BMap.Icon(marker.icon, new BMap.Size(marker.width, marker.height));
+        }
+
         opts['icon'] = icon;
     }
     if (marker.enableDragging) {

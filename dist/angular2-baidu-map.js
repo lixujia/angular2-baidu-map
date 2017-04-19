@@ -43,7 +43,7 @@ module.exports =
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -85,8 +85,12 @@ module.exports =
 	            return;
 	        }
 	        var opts = changes['options'].currentValue;
-	        CoreOperations_1.reCenter(this.map, opts);
-	        CoreOperations_1.reZoom(this.map, opts);
+	        if (opts.hasOwnProperty('center')) {
+	            CoreOperations_1.reCenter(this.map, opts);
+	        }
+	        if (opts.hasOwnProperty('zoom')) {
+	            CoreOperations_1.reZoom(this.map, opts);
+	        }
 	        CoreOperations_1.redrawMarkers.bind(this)(this.map, this.previousMarkers, opts);
 	    };
 	    BaiduMap.prototype._draw = function () {
@@ -138,15 +142,15 @@ module.exports =
 	exports.MapStatus = MapStatus_2.MapStatus;
 
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = require("@angular/core");
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -158,9 +162,9 @@ module.exports =
 	;
 
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -178,9 +182,9 @@ module.exports =
 	};
 
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -223,9 +227,9 @@ module.exports =
 	};
 
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -321,9 +325,9 @@ module.exports =
 	};
 
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -356,9 +360,9 @@ module.exports =
 	};
 
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -382,9 +386,9 @@ module.exports =
 	};
 
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -415,9 +419,9 @@ module.exports =
 	;
 
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -451,9 +455,9 @@ module.exports =
 	;
 
 
-/***/ },
+/***/ }),
 /* 10 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -466,9 +470,9 @@ module.exports =
 	})(ControlAnchor = exports.ControlAnchor || (exports.ControlAnchor = {}));
 
 
-/***/ },
+/***/ }),
 /* 11 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	Object.defineProperty(exports, "__esModule", { value: true });
@@ -481,5 +485,5 @@ module.exports =
 	})(NavigationControlType = exports.NavigationControlType || (exports.NavigationControlType = {}));
 
 
-/***/ }
+/***/ })
 /******/ ]);

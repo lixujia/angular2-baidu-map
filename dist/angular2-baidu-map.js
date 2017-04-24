@@ -302,7 +302,7 @@ module.exports =
 	        var previousMarker = { marker: marker2, listeners: [] };
 	        previousMarkers.push(previousMarker);
 	        var onMarkerClickedListener = function () {
-	            self.onMarkerClicked.emit(marker2);
+	            self.onMarkerClicked.emit(marker);
 	        };
 	        marker2.addEventListener('click', onMarkerClickedListener);
 	        previousMarker.listeners.push(onMarkerClickedListener);

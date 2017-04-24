@@ -14,3 +14,7 @@ build/
 
 #typings
 typings/
+
+#vscode
+.history
+.vscode

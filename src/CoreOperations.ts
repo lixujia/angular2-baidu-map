@@ -104,5 +104,26 @@ export const redrawMarkers = function(map: any, previousMarkers: PreviousMarker[
         };
         previousMarker.listeners.push(openInfoWindowListener);
         marker2.addEventListener('click', openInfoWindowListener);
+
+        let onMarkerDbClickedListener = evt => {
+            evt['ori_marker'] = marker;
+            self.onMarkerDbClicked.emit(evt);
+        }
+        marker2.addEventListener('dblclick', onMarkerDbClickedListener);
+        previousMarker.listeners.push(onMarkerDbClickedListener);
+        
+        let onMarkerDragStartListener = evt => {
+            evt['ori_marker'] = marker;
+            self.onMarkerDragStart.emit(evt);
+        }
+        marker2.addEventListener('dragstart', onMarkerDragStartListener);
+        previousMarker.listeners.push(onMarkerDragStartListener);
+
+        let onMarkerDragEndListener = evt => {
+            evt['ori_marker'] = marker;
+            self.onMarkerDragEnd.emit(evt);
+        }
+        marker2.addEventListener('dragend', onMarkerDragEndListener);
+        previousMarker.listeners.push(onMarkerDragEndListener);
     });
 };

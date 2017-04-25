@@ -41,6 +41,9 @@ export class BaiduMap implements OnInit, OnChanges {
     @Input('offline') offlineOpts: OfflineOptions;
     @Output() onMapLoaded = new EventEmitter();
     @Output() onMarkerClicked = new EventEmitter();
+    @Output() onMarkerDbClicked = new EventEmitter();
+    @Output() onMarkerDragStart = new EventEmitter();
+    @Output() onMarkerDragEnd = new EventEmitter();
 
     map: any;
     offlineWords: string;

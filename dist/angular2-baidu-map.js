@@ -69,6 +69,9 @@ module.exports =
 	        this.el = el;
 	        this.onMapLoaded = new core_1.EventEmitter();
 	        this.onMarkerClicked = new core_1.EventEmitter();
+	        this.onMarkerDbClicked = new core_1.EventEmitter();
+	        this.onMarkerDragStart = new core_1.EventEmitter();
+	        this.onMarkerDragEnd = new core_1.EventEmitter();
 	        this.previousMarkers = [];
 	    }
 	    BaiduMap.prototype.ngOnInit = function () {
@@ -125,6 +128,18 @@ module.exports =
 	    core_1.Output(),
 	    __metadata("design:type", Object)
 	], BaiduMap.prototype, "onMarkerClicked", void 0);
+	__decorate([
+	    core_1.Output(),
+	    __metadata("design:type", Object)
+	], BaiduMap.prototype, "onMarkerDbClicked", void 0);
+	__decorate([
+	    core_1.Output(),
+	    __metadata("design:type", Object)
+	], BaiduMap.prototype, "onMarkerDragStart", void 0);
+	__decorate([
+	    core_1.Output(),
+	    __metadata("design:type", Object)
+	], BaiduMap.prototype, "onMarkerDragEnd", void 0);
 	BaiduMap = __decorate([
 	    core_1.Component({
 	        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
@@ -321,6 +336,24 @@ module.exports =
 	        };
 	        previousMarker.listeners.push(openInfoWindowListener);
 	        marker2.addEventListener('click', openInfoWindowListener);
+	        var onMarkerDbClickedListener = function (evt) {
+	            evt['ori_marker'] = marker;
+	            self.onMarkerDbClicked.emit(evt);
+	        };
+	        marker2.addEventListener('dblclick', onMarkerDbClickedListener);
+	        previousMarker.listeners.push(onMarkerDbClickedListener);
+	        var onMarkerDragStartListener = function (evt) {
+	            evt['ori_marker'] = marker;
+	            self.onMarkerDragStart.emit(evt);
+	        };
+	        marker2.addEventListener('dragstart', onMarkerDragStartListener);
+	        previousMarker.listeners.push(onMarkerDragStartListener);
+	        var onMarkerDragEndListener = function (evt) {
+	            evt['ori_marker'] = marker;
+	            self.onMarkerDragEnd.emit(evt);
+	        };
+	        marker2.addEventListener('dragend', onMarkerDragEndListener);
+	        previousMarker.listeners.push(onMarkerDragEndListener);
 	    });
 	};
 

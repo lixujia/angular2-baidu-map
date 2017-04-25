@@ -12,6 +12,7 @@ export declare class BaiduMap implements OnInit, OnChanges {
     onMarkerDbClicked: EventEmitter<{}>;
     onMarkerDragStart: EventEmitter<{}>;
     onMarkerDragEnd: EventEmitter<{}>;
+    onMapDblClicked: EventEmitter<{}>;
     map: any;
     offlineWords: string;
     previousMarkers: PreviousMarker[];

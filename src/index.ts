@@ -44,6 +44,7 @@ export class BaiduMap implements OnInit, OnChanges {
     @Output() onMarkerDbClicked = new EventEmitter();
     @Output() onMarkerDragStart = new EventEmitter();
     @Output() onMarkerDragEnd = new EventEmitter();
+    @Output() onMapDblClicked = new EventEmitter();
 
     map: any;
     offlineWords: string;
@@ -83,6 +84,10 @@ export class BaiduMap implements OnInit, OnChanges {
         this.map = createInstance(options, this.el.nativeElement);
         this.onMapLoaded.emit(this.map);
         redrawMarkers.bind(this)(this.map, this.previousMarkers, options);
+
+        this.map.addEventListener('dblclick', evt => {
+            this.onMapDblClicked.emit(evt);
+        });
     }
 }
 

@@ -83,8 +83,9 @@ export const redrawMarkers = function(map: any, previousMarkers: PreviousMarker[
         previousMarkers.push(previousMarker);
 
 
-        let onMarkerClickedListener = () => {
-            self.onMarkerClicked.emit(marker);
+        let onMarkerClickedListener = evt => {
+            evt['ori_marker'] = marker;
+            self.onMarkerClicked.emit(evt);
         };
         marker2.addEventListener('click', onMarkerClickedListener);
         previousMarker.listeners.push(onMarkerClickedListener);

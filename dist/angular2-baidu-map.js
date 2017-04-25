@@ -72,6 +72,7 @@ module.exports =
 	        this.onMarkerDbClicked = new core_1.EventEmitter();
 	        this.onMarkerDragStart = new core_1.EventEmitter();
 	        this.onMarkerDragEnd = new core_1.EventEmitter();
+	        this.onMapDblClicked = new core_1.EventEmitter();
 	        this.previousMarkers = [];
 	    }
 	    BaiduMap.prototype.ngOnInit = function () {
@@ -97,10 +98,14 @@ module.exports =
 	        CoreOperations_1.redrawMarkers.bind(this)(this.map, this.previousMarkers, opts);
 	    };
 	    BaiduMap.prototype._draw = function () {
+	        var _this = this;
 	        var options = Object.assign({}, defaults_1.defaultOpts, this.options);
 	        this.map = CoreOperations_1.createInstance(options, this.el.nativeElement);
 	        this.onMapLoaded.emit(this.map);
 	        CoreOperations_1.redrawMarkers.bind(this)(this.map, this.previousMarkers, options);
+	        this.map.addEventListener('dblclick', function (evt) {
+	            _this.onMapDblClicked.emit(evt);
+	        });
 	    };
 	    return BaiduMap;
 	}());
@@ -140,6 +145,10 @@ module.exports =
 	    core_1.Output(),
 	    __metadata("design:type", Object)
 	], BaiduMap.prototype, "onMarkerDragEnd", void 0);
+	__decorate([
+	    core_1.Output(),
+	    __metadata("design:type", Object)
+	], BaiduMap.prototype, "onMapDblClicked", void 0);
 	BaiduMap = __decorate([
 	    core_1.Component({
 	        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
@@ -316,8 +325,9 @@ module.exports =
 	        map.addOverlay(marker2);
 	        var previousMarker = { marker: marker2, listeners: [] };
 	        previousMarkers.push(previousMarker);
-	        var onMarkerClickedListener = function () {
-	            self.onMarkerClicked.emit(marker);
+	        var onMarkerClickedListener = function (evt) {
+	            evt['ori_marker'] = marker;
+	            self.onMarkerClicked.emit(evt);
 	        };
 	        marker2.addEventListener('click', onMarkerClickedListener);
 	        previousMarker.listeners.push(onMarkerClickedListener);

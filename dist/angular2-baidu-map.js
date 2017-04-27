@@ -336,21 +336,20 @@ module.exports =
 	        };
 	        marker2.addEventListener('click', onMarkerClickedListener);
 	        previousMarker.listeners.push(onMarkerClickedListener);
-	        if (!marker.title && !marker.content) {
-	            return;
+	        if (marker.title || marker.content) {
+	            var msg = "<p>" + (marker.title || '') + "</p><p>" + (marker.content || '') + "</p>";
+	            var infoWindow2_1 = new BMap.InfoWindow(msg, {
+	                enableMessage: !!marker.enableMessage
+	            });
+	            if (marker.autoDisplayInfoWindow) {
+	                marker2.openInfoWindow(infoWindow2_1);
+	            }
+	            var openInfoWindowListener = function () {
+	                this.openInfoWindow(infoWindow2_1);
+	            };
+	            previousMarker.listeners.push(openInfoWindowListener);
+	            marker2.addEventListener('click', openInfoWindowListener);
 	        }
-	        var msg = "<p>" + (marker.title || '') + "</p><p>" + (marker.content || '') + "</p>";
-	        var infoWindow2 = new BMap.InfoWindow(msg, {
-	            enableMessage: !!marker.enableMessage
-	        });
-	        if (marker.autoDisplayInfoWindow) {
-	            marker2.openInfoWindow(infoWindow2);
-	        }
-	        var openInfoWindowListener = function () {
-	            this.openInfoWindow(infoWindow2);
-	        };
-	        previousMarker.listeners.push(openInfoWindowListener);
-	        marker2.addEventListener('click', openInfoWindowListener);
 	        var onMarkerDbClickedListener = function (evt) {
 	            evt['ori_marker'] = marker;
 	            self.onMarkerDbClicked.emit(evt);

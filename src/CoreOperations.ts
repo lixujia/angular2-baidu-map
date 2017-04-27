@@ -90,21 +90,20 @@ export const redrawMarkers = function(map: any, previousMarkers: PreviousMarker[
         marker2.addEventListener('click', onMarkerClickedListener);
         previousMarker.listeners.push(onMarkerClickedListener);
 
-        if (!marker.title && !marker.content) {
-            return;
+        if (marker.title || marker.content) {
+            let msg = `<p>${marker.title || ''}</p><p>${marker.content || ''}</p>`;
+            let infoWindow2 = new BMap.InfoWindow(msg, {
+                enableMessage: !!marker.enableMessage
+            });
+            if (marker.autoDisplayInfoWindow) {
+                marker2.openInfoWindow(infoWindow2);
+            }
+            let openInfoWindowListener = function() {
+                this.openInfoWindow(infoWindow2);
+            };
+            previousMarker.listeners.push(openInfoWindowListener);
+            marker2.addEventListener('click', openInfoWindowListener);
         }
-        let msg = `<p>${marker.title || ''}</p><p>${marker.content || ''}</p>`;
-        let infoWindow2 = new BMap.InfoWindow(msg, {
-            enableMessage: !!marker.enableMessage
-        });
-        if (marker.autoDisplayInfoWindow) {
-            marker2.openInfoWindow(infoWindow2);
-        }
-        let openInfoWindowListener = function() {
-            this.openInfoWindow(infoWindow2);
-        };
-        previousMarker.listeners.push(openInfoWindowListener);
-        marker2.addEventListener('click', openInfoWindowListener);
 
         let onMarkerDbClickedListener = evt => {
             evt['ori_marker'] = marker;

@@ -10,6 +10,7 @@ export declare class BaiduMap implements OnInit, OnChanges {
     onMapLoaded: EventEmitter<{}>;
     onMarkerClicked: EventEmitter<{}>;
     onMarkerDbClicked: EventEmitter<{}>;
+    onMarkerRightClicked: EventEmitter<{}>;
     onMarkerDragStart: EventEmitter<{}>;
     onMarkerDragEnd: EventEmitter<{}>;
     onMapDblClicked: EventEmitter<{}>;

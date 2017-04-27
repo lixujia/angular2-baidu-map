@@ -126,5 +126,12 @@ export const redrawMarkers = function(map: any, previousMarkers: PreviousMarker[
         }
         marker2.addEventListener('dragend', onMarkerDragEndListener);
         previousMarker.listeners.push(onMarkerDragEndListener);
+
+        let onMarkerRightClickedListener = evt => {
+            evt['ori_marker'] = marker;
+            self.onMarkerRightClicked.emit(evt);
+        }
+        marker2.addEventListener('rightclick', onMarkerRightClickedListener);
+        previousMarker.listeners.push(onMarkerRightClickedListener);
     });
 };

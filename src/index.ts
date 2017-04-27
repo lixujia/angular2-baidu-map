@@ -42,6 +42,7 @@ export class BaiduMap implements OnInit, OnChanges {
     @Output() onMapLoaded = new EventEmitter();
     @Output() onMarkerClicked = new EventEmitter();
     @Output() onMarkerDbClicked = new EventEmitter();
+    @Output() onMarkerRightClicked = new EventEmitter();
     @Output() onMarkerDragStart = new EventEmitter();
     @Output() onMarkerDragEnd = new EventEmitter();
     @Output() onMapDblClicked = new EventEmitter();

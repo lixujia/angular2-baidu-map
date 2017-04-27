@@ -70,6 +70,7 @@ module.exports =
 	        this.onMapLoaded = new core_1.EventEmitter();
 	        this.onMarkerClicked = new core_1.EventEmitter();
 	        this.onMarkerDbClicked = new core_1.EventEmitter();
+	        this.onMarkerRightClicked = new core_1.EventEmitter();
 	        this.onMarkerDragStart = new core_1.EventEmitter();
 	        this.onMarkerDragEnd = new core_1.EventEmitter();
 	        this.onMapDblClicked = new core_1.EventEmitter();
@@ -137,6 +138,10 @@ module.exports =
 	    core_1.Output(),
 	    __metadata("design:type", Object)
 	], BaiduMap.prototype, "onMarkerDbClicked", void 0);
+	__decorate([
+	    core_1.Output(),
+	    __metadata("design:type", Object)
+	], BaiduMap.prototype, "onMarkerRightClicked", void 0);
 	__decorate([
 	    core_1.Output(),
 	    __metadata("design:type", Object)
@@ -364,6 +369,12 @@ module.exports =
 	        };
 	        marker2.addEventListener('dragend', onMarkerDragEndListener);
 	        previousMarker.listeners.push(onMarkerDragEndListener);
+	        var onMarkerRightClickedListener = function (evt) {
+	            evt['ori_marker'] = marker;
+	            self.onMarkerRightClicked.emit(evt);
+	        };
+	        marker2.addEventListener('rightclick', onMarkerRightClickedListener);
+	        previousMarker.listeners.push(onMarkerRightClickedListener);
 	    });
 	};
 

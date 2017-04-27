@@ -368,7 +368,9 @@ module.exports =
 	            evt['ori_marker'] = marker;
 	            self.onMarkerDragEnd.emit(evt);
 	        };
-	        marker2.addEventListener('dragend', onMarkerDragEndListener);
+	        console.log('add drag end listener.');
+	        var result = marker2.addEventListener('dragend', onMarkerDragEndListener);
+	        console.log(result);
 	        previousMarker.listeners.push(onMarkerDragEndListener);
 	        var onMarkerRightClickedListener = function (evt) {
 	            console.log('right click marker.');

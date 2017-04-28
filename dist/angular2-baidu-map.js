@@ -363,16 +363,12 @@ module.exports =
 	        marker2.addEventListener('dragstart', onMarkerDragStartListener);
 	        previousMarker.listeners.push(onMarkerDragStartListener);
 	        var onMarkerDragEndListener = function (evt) {
-	            console.log('marker drag end.');
 	            evt['ori_marker'] = marker;
 	            self.onMarkerDragEnd.emit(evt);
 	        };
-	        console.log('add drag end listener.');
-	        var result = marker2.addEventListener('dragend', onMarkerDragEndListener);
-	        console.log(result);
+	        marker2.addEventListener('dragend', onMarkerDragEndListener);
 	        previousMarker.listeners.push(onMarkerDragEndListener);
 	        var onMarkerRightClickedListener = function (evt) {
-	            console.log('right click marker.');
 	            evt['ori_marker'] = marker;
 	            self.onMarkerRightClicked.emit(evt);
 	        };

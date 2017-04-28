@@ -120,19 +120,13 @@ export const redrawMarkers = function(map: any, previousMarkers: PreviousMarker[
         previousMarker.listeners.push(onMarkerDragStartListener);
 
         let onMarkerDragEndListener = evt => {
-            console.log('marker drag end.');
             evt['ori_marker'] = marker;
             self.onMarkerDragEnd.emit(evt);
         };
-
-        console.log('add drag end listener.');
-        const result = marker2.addEventListener('dragend', onMarkerDragEndListener);
-        console.log(result);
-
+        marker2.addEventListener('dragend', onMarkerDragEndListener);
         previousMarker.listeners.push(onMarkerDragEndListener);
 
         let onMarkerRightClickedListener = evt => {
-            console.log('right click marker.');
             evt['ori_marker'] = marker;
             self.onMarkerRightClicked.emit(evt);
         };

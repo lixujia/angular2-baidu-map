@@ -69,8 +69,15 @@ export class BaiduMap implements OnInit, OnChanges {
             return;
         }
         let opts = changes['options'].currentValue;
-        reCenter(this.map, opts);
-        reZoom(this.map, opts);
+
+        if (opts.hasOwnProperty('center')) {
+            reCenter(this.map, opts);
+        }
+
+        if (opts.hasOwnProperty('zoom')) {
+            reZoom(this.map, opts);
+        }
+
         redrawMarkers.bind(this)(this.map, this.previousMarkers, opts);
     }
 

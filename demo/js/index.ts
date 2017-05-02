@@ -1,14 +1,40 @@
-'use strict';
+import 'core-js/es6';
+import 'core-js/es7/reflect';
+import 'rxjs';
+import 'zone.js/dist/zone';
+import { NgModule, enableProdMode }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import {MainApp} from './demo.app';
+import '../css/main.css';
 
-require.ensure(['splash-screen/dist/splash.min.css', 'splash-screen'], function(require) {
-    (<any>require('splash-screen/dist/splash.min.css')).use();
-    (<any>require('splash-screen')).Splash.enable('circular');
-});
+import { BaiduMapModule } from '../../src/';
+@NgModule({
+  imports:      [ BrowserModule, BaiduMapModule ],
+  declarations: [ MainApp ],
+  bootstrap:    [ MainApp ]
+})
+class AppModule { }
 
-require.ensure(['../css/main.css', './main'], function(require) {
+class App {
 
-    (<any>require('../css/main.css')).use();
+    constructor() {
+        enableProdMode();
+    }
 
-    var App = (<any>require('./main')).default;
-    (new App()).run();
-});
+    destroySplash(): void {
+        document.head.removeChild(document.querySelector('#splash-spinner'));
+        document.body.removeChild(document.querySelector('.spinner'));
+    }
+
+    launch() {
+        platformBrowserDynamic().bootstrapModule(AppModule);
+    }
+
+    run(): void {
+        this.destroySplash();
+        this.launch();
+    }
+}
+
+new App().run();

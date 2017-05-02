@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component, Input, OnInit, AfterContentInit } from '@angular/core';
-import { OfflineOptions, ControlAnchor, NavigationControlType } from '../../src';
+import { OfflineOptions, ControlAnchor, NavigationControlType } from '../../';
 
 var tpl = <string>require('./demo.app.tpl');
 var style = <string>require('./demo.app.style');
@@ -96,6 +96,10 @@ export class MainApp implements OnInit, AfterContentInit {
 
     clickMarker(marker: any) {
         console.log('The clicked marker is', marker.getPosition());
+    }
+
+    clickmap(e: any) {
+        console.log(`Map clicked with coordinate: ${e.point.lng}, ${e.point.lat}`);
     }
 
     toggleDisplay(e: MouseEvent) {

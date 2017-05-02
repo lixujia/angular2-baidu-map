@@ -16,15 +16,35 @@ npm install angular2-baidu-map
 
 ## Usage ##
 
+Import in your `AppModule.ts`
+
+```javascript
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { BaiduMapModule } from 'angular2-baidu-map';//import BaiduMapModule
+
+import { MainApp } from './demo.app';
+
+@NgModule({
+    imports:      [ BrowserModule, BaiduMapModule ],
+    declarations: [ MainApp ],
+    bootstrap:    [ MainApp ]
+})
+class AppModule { }
+```
+
+Create `demo.app.ts`
+
 ```javascript
 import {Component, OnInit} from '@angular/core';
-import {BaiduMap, OfflineOptions, ControlAnchor, NavigationControlType} from 'angular2-baidu-map';
+import { OfflineOptions, ControlAnchor, NavigationControlType } from 'angular2-baidu-map';
 
 @Component({
     selector: 'map-presentation',
     template: `
         <h1>Test Baidu-Map<h1>
-        <baidu-map ak="put your ak here" [options]="opts" [offline]="offlineOpts" (onMapLoaded)="loadMap($event)" (onMarkerClicked)="clickMarker($event)"></baidu-map>
+        <baidu-map ak="put your ak here" [options]="opts" [offline]="offlineOpts" (onMapLoaded)="loadMap($event)" (onMarkerClicked)="clickMarker($event)" (onClicked)="clickmap($event)" ></baidu-map>
     `,
     styles: [`
         baidu-map{
@@ -51,7 +71,6 @@ export class MainApp implements OnInit {
                 latitude: 31.245554,
                 title: 'Where',
                 content: 'Put description here',
-                autoDisplayInfoWindow: true,
                 enableDragging: true
             }],
             geolocationCtrl: {
@@ -74,14 +93,17 @@ export class MainApp implements OnInit {
         };
     }
 
-    loadMap(e: any) {
-        console.log(e);//e here is the instance of BMap.Map
+    loadMap(map: any) {
+        console.log('map instance here', map);
     }
 
-    clickMarker(marker: any){
-        console.log('The clicked marker is', marker.getPosition());
+    clickMarker(marker: any) {
+        console.log('The clicked marker is', marker);
     }
 
+    clickmap(e: any) {
+        console.log(`Map clicked with coordinate: ${e.point.lng}, ${e.point.lat}`);
+    }
 }
 ```
 

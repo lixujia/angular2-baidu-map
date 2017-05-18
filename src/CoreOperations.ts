@@ -92,7 +92,7 @@ export const redrawMarkers = function(map: any, previousMarkers: PreviousMarker[
 
         if (marker.title || marker.content) {
             let install_info = marker.sensor_names.map((sensor, index) => {
-                return `<li>${sensor}: ${marker.sensor_installed[index]}</li>`
+                return `<li>${sensor}: ${marker.sensor_install[index]}</li>`
             }).join('');
             let info = `<div>
             <h1>${marker.title}</h1>

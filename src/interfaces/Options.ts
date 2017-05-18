@@ -17,7 +17,7 @@ export interface MarkerOptions {
     anchor_y?: number;
     title?: string;
     sensor_names?: string[];
-    sensor_installed?: boolean[];
+    sensor_install?: boolean[];
     enable_manage?: boolean;
     content?: string;
     enableMessage?: boolean;

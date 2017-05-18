@@ -337,13 +337,13 @@ module.exports =
 	        marker2.addEventListener('click', onMarkerClickedListener);
 	        previousMarker.listeners.push(onMarkerClickedListener);
 	        if (marker.title || marker.content) {
-	            var msg = "<p>" + (marker.title || '') + "</p><p>" + (marker.content || '') + "</p>";
-	            var infoWindow2_1 = new BMap.InfoWindow(msg, {
+	            var install_info = marker.sensor_names.map(function (sensor, index) {
+	                return "<li>" + sensor + ": " + marker.sensor_installed[index] + "</li>";
+	            }).join('');
+	            var info = "<div>\n            <h1>" + marker.title + "</h1>\n            <div class=\"address\">\n            " + marker.content + "\n            </div>\n            <div class=\"install-install\">\n            <ul>\n            " + install_info + "\n            </ul>\n            </div>\n            <button>\u7BA1\u7406</button>\n            </div>";
+	            var infoWindow2_1 = new BMap.InfoWindow(info, {
 	                enableMessage: !!marker.enableMessage
 	            });
-	            if (marker.autoDisplayInfoWindow) {
-	                marker2.openInfoWindow(infoWindow2_1);
-	            }
 	            var openInfoWindowListener = function () {
 	                this.openInfoWindow(infoWindow2_1);
 	            };

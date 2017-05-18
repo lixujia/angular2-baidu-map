@@ -16,6 +16,9 @@ export interface MarkerOptions {
     anchor_x?: number;
     anchor_y?: number;
     title?: string;
+    sensor_names?: string[];
+    sensor_installed?: boolean[];
+    enable_manage?: boolean;
     content?: string;
     enableMessage?: boolean;
     autoDisplayInfoWindow?: boolean;

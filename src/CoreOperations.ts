@@ -91,13 +91,24 @@ export const redrawMarkers = function(map: any, previousMarkers: PreviousMarker[
         previousMarker.listeners.push(onMarkerClickedListener);
 
         if (marker.title || marker.content) {
-            let msg = `<p>${marker.title || ''}</p><p>${marker.content || ''}</p>`;
-            let infoWindow2 = new BMap.InfoWindow(msg, {
+            let install_info = marker.sensor_names.map((sensor, index) => {
+                return `<li>${sensor}: ${marker.sensor_installed[index]}</li>`
+            }).join('');
+            let info = `<div>
+            <h1>${marker.title}</h1>
+            <div class="address">
+            ${marker.content}
+            </div>
+            <div class="install-install">
+            <ul>
+            ${install_info}
+            </ul>
+            </div>
+            <button>管理</button>
+            </div>`
+            let infoWindow2 = new BMap.InfoWindow(info, {
                 enableMessage: !!marker.enableMessage
             });
-            if (marker.autoDisplayInfoWindow) {
-                marker2.openInfoWindow(infoWindow2);
-            }
             let openInfoWindowListener = function() {
                 this.openInfoWindow(infoWindow2);
             };

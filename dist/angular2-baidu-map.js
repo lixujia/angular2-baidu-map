@@ -338,7 +338,14 @@ module.exports =
 	        previousMarker.listeners.push(onMarkerClickedListener);
 	        if (marker.title || marker.content) {
 	            var install_info = marker.sensor_names.map(function (sensor, index) {
-	                return "<li>" + sensor + ": " + marker.sensor_install[index] + "</li>";
+	                var install_state = "";
+	                if (marker.sensor_install[index]) {
+	                    install_state = "<span style=\"{color: green;}\">已安装</span>";
+	                }
+	                else {
+	                    install_state = "<span style=\"{color: gray;}\">未安装</span>";
+	                }
+	                return "<li>" + sensor + ": " + install_state + "</li>";
 	            }).join('');
 	            var info = "<div>\n            <h1>" + marker.title + "</h1>\n            <div class=\"address\">\n            " + marker.content + "\n            </div>\n            <div class=\"install-install\">\n            <ul>\n            " + install_info + "\n            </ul>\n            </div>\n            <button>\u7BA1\u7406</button>\n            </div>";
 	            var infoWindow2_1 = new BMap.InfoWindow(info, {

@@ -112,7 +112,6 @@ export const redrawMarkers = function(map: any, previousMarkers: PreviousMarker[
             ${install_info}
             </ul>
             </div>
-            <button>管理</button>
             </div>`
             let infoWindow2 = new BMap.InfoWindow(info, {
                 enableMessage: !!marker.enableMessage
